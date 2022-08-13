@@ -1,21 +1,35 @@
 ---
 import Container from '@components/common/Container.astro'
+import ReadMoreAnchor from '@components/common/ReadMoreAnchor.astro'
 import Section from '@components/common/Section.astro'
 import SectionHading from '@components/common/SectionHading.astro'
-import BlogCardAnchorList from '@components/features/blog/BlogCardAnchorList.astro'
+import BlogAnchorList from '@components/features/blog/BlogAnchorList.astro'
 import Heading from '@components/features/home/Heading.astro'
 import Layout from '@layouts/Layout.astro'
-import { getTOPSettings } from '@lib/microCMS/getContents'
+import { getBlogs, getTOPSettings } from '@lib/microCMS/getContents'
 
 const { recommended_blogs } = await getTOPSettings({ depth: 2 })
+const { contents: latestBlogs } = await getBlogs({ limit: 5, depth: 2 })
 ---
 
 <Layout>
   <Heading />
-  <Section>
-    <Container>
+  <Container>
+    <Section>
       <SectionHading>Recommended blogs</SectionHading>
-      <BlogCardAnchorList blogs={recommended_blogs} />
-    </Container>
-  </Section>
+      <BlogAnchorList blogs={recommended_blogs} />
+    </Section>
+  </Container>
+
+  <Container>
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-10">
+      <Section>
+        <SectionHading>Latest blogs</SectionHading>
+        <BlogAnchorList blogs={latestBlogs} type="secondary" />
+        <div class="flex justify-end mt-4">
+          <ReadMoreAnchor href="/blogs" a11yText="latest blogs" />
+        </div>
+      </Section>
+    </div>
+  </Container>
 </Layout>

@@ -18,4 +18,5 @@ export type TOPSettings = {
     MicroCMSListContent & Blog,
     MicroCMSListContent & Blog
   ]
+  picked_categories: (MicroCMSListContent & Category)[]
 }

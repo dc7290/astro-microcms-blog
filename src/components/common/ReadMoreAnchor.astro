@@ -1,0 +1,18 @@
+---
+import arrowRight from '@images/arrow-right.svg'
+
+export interface Props {
+  href: string
+  a11yText: string
+}
+const { href, a11yText } = Astro.props as Props
+---
+
+<a href={href} class="group relative flex items-center">
+  <span class="mr-1.5">Read more<span class="sr-only">{a11yText}</span></span>
+  <img src={arrowRight} width={16} height={16} alt="" class="pt-0.5" />
+  <span class="absolute inset-x-0 bottom-0 h-px bg-white"></span>
+  <span
+    class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-pink-500 to-violet-500 origin-left transition-transform duration-300 scale-x-0 sm:group-hover:scale-x-100"
+  ></span>
+</a>
