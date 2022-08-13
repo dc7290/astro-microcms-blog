@@ -8,8 +8,22 @@ import Heading from '@components/features/home/Heading.astro'
 import Layout from '@layouts/Layout.astro'
 import { getBlogs, getTOPSettings } from '@lib/microCMS/getContents'
 
-const { recommended_blogs } = await getTOPSettings({ depth: 2 })
+const { recommended_blogs, picked_categories } = await getTOPSettings({
+  depth: 2,
+})
 const { contents: latestBlogs } = await getBlogs({ limit: 5, depth: 2 })
+
+const pickedCategoriesBlogs = await Promise.all(
+  picked_categories.map(async (category) => ({
+    category,
+    blogs: (
+      await getBlogs({
+        limit: 5,
+        filters: `category[equals]${category.id}`,
+      })
+    ).contents,
+  }))
+)
 ---
 
 <Layout>
@@ -22,7 +36,21 @@ const { contents: latestBlogs } = await getBlogs({ limit: 5, depth: 2 })
   </Container>
 
   <Container>
-    <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-10">
+    <div class="grid grid-cols-1 gap-x-5 lg:grid-cols-2 lg:gap-x-10">
+      {
+        pickedCategoriesBlogs.map(({ category, blogs }) => (
+          <Section>
+            <SectionHading>Picked category: {category.name}</SectionHading>
+            <BlogAnchorList blogs={blogs} type="secondary" />
+            <div class="flex justify-end mt-4">
+              <ReadMoreAnchor
+                href={`/categories/${category.id}`}
+                a11yText={`${category.name} blogs`}
+              />
+            </div>
+          </Section>
+        ))
+      }
       <Section>
         <SectionHading>Latest blogs</SectionHading>
         <BlogAnchorList blogs={latestBlogs} type="secondary" />
