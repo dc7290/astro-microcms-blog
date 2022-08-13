@@ -1,0 +1,89 @@
+---
+import Footer from '@components/layout/Footer.astro'
+import Header from '@components/layout/Header.astro'
+
+export type Props = {
+  title?: string
+  description?: string
+  og?: {
+    image?: string
+  }
+}
+
+const config = {
+  title: '',
+  description: '',
+}
+
+const props = Astro.props as Props
+
+const title = props.title ? `${props.title} | ${config.title}` : config.title
+const description = props.description ?? config.description
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const ogImage = new URL(props.og?.image ?? '/og.png', Astro.url)
+const favicon = new URL('/favicon.ico', Astro.url)
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,shrink-to-fit=no" />
+
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/x-icon" href={favicon} />
+  </head>
+
+  <body
+    class="body text-white font-sans leading-normal bg-slate-900 min-h-screen"
+  >
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <style is:global lang="scss">
+      button,
+      a {
+        &:focus-visible {
+          @apply outline outline-2 outline-black;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none;
+        }
+      }
+
+      * {
+        @apply tracking-wider;
+      }
+    </style>
+
+    <script>
+      import windowNarrow from '@utils/windowNarrow'
+
+      windowNarrow()
+    </script>
+  </body>
+</html>
+
+<style>
+  .body {
+    background-size: 500px 500px;
+    background-image: url(../images/bg.svg);
+    background-repeat: repeat;
+  }
+</style>

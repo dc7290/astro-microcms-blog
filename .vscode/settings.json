@@ -1,0 +1,16 @@
+{
+  "search.exclude": {
+    "yarn.lock": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list"]
+}
