@@ -1,37 +1,21 @@
 ---
-import { Picture } from '@astrojs/image/components'
-
 import Container from '@components/common/Container.astro'
+import Section from '@components/common/Section.astro'
+import SectionHading from '@components/common/SectionHading.astro'
+import BlogCardAnchorList from '@components/features/blog/BlogCardAnchorList.astro'
 import Heading from '@components/features/home/Heading.astro'
 import Layout from '@layouts/Layout.astro'
 import { getTOPSettings } from '@lib/microCMS/getContents'
 
-const { recommended_blogs } = await getTOPSettings()
+const { recommended_blogs } = await getTOPSettings({ depth: 2 })
 ---
 
 <Layout>
   <Heading />
-  <section class="my-16 md:my-24 bg-slate-900">
+  <Section>
     <Container>
-      <h2 class="font-bold">Recommended blogs</h2>
-      <ul class="grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-10 mt-6 md:mt-8">
-        {
-          recommended_blogs.map((blog) => (
-            <li>
-              <a>
-                <Picture
-                  src={blog.eyecatch.url}
-                  width={blog.eyecatch.width}
-                  aspectRatio={1920 / 1280}
-                  sizes="(min-width: 768px) 400px, 90vw"
-                  widths={[640, 960, 1280, 1560, 1920, 2400, 3600]}
-                />
-                <p>{blog.title}</p>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <SectionHading>Recommended blogs</SectionHading>
+      <BlogCardAnchorList blogs={recommended_blogs} />
     </Container>
-  </section>
+  </Section>
 </Layout>

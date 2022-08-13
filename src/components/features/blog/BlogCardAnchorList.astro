@@ -1,0 +1,34 @@
+---
+import { MicroCMSListContent } from 'microcms-js-sdk'
+
+import BlogCardAnchor from '@components/features/blog/BlogCardAnchor.astro'
+import { Blog } from '@lib/microCMS/types'
+
+export interface Props {
+  blogs: (Blog & MicroCMSListContent)[]
+  cols?: 2 | 3
+}
+const { blogs, cols = 3 } = Astro.props as Props
+---
+
+<ul
+  class:list={[
+    'grid grid-cols-1 gap-5 lg:gap-10 mt-6 md:mt-8',
+    cols === 2 && 'md:grid-cols-2',
+    cols === 3 && 'md:grid-cols-3',
+  ]}
+>
+  {
+    blogs.map((blog) => (
+      <li>
+        <BlogCardAnchor
+          title={blog.title}
+          eyecatch={blog.eyecatch}
+          id={blog.id}
+          category={blog.category.name}
+          publishedAt={blog.publishedAt ?? blog.createdAt}
+        />
+      </li>
+    ))
+  }
+</ul>

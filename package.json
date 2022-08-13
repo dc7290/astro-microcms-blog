@@ -32,6 +32,7 @@
     "sass": "^1.54.4"
   },
   "dependencies": {
+    "dayjs": "^1.11.5",
     "microcms-js-sdk": "^2.2.1",
     "preact": "^10.10.2"
   }

@@ -1,0 +1,39 @@
+---
+import { Picture } from '@astrojs/image/components'
+
+import { formatDate } from '@lib/date/format'
+import { Blog } from '@lib/microCMS/types'
+
+export interface Props extends Pick<Blog, 'title' | 'eyecatch'> {
+  id: string
+  category: string
+  publishedAt: string
+}
+const { id, category, publishedAt, title, eyecatch } = Astro.props as Props
+---
+
+<a href={`/blogs/${id}`} class="group block">
+  <div class="overflow-hidden">
+    <Picture
+      src={eyecatch.url}
+      width={eyecatch.width}
+      aspectRatio={1920 / 1280}
+      sizes="(min-width: 768px) 400px, 90vw"
+      widths={[640, 960, 1280, 1560, 1920, 2400, 3600]}
+      alt=""
+      class="[&_img]:sm:group-hover:scale-105 [&_img]:transition-transform [&_img]:duration-300"
+    />
+  </div>
+  <p class="mt-4 leading-tight text-lg">{title}</p>
+  <div class="mt-3 flex justify-start">
+    <div
+      class="border border-white rounded px-4 h-7 pb-0.5 flex items-center justify-center"
+    >
+      {category}
+    </div>
+  </div>
+  <div class="text-sm mt-3">
+    PublishedAt:{' '}
+    <time>{formatDate(publishedAt)}</time>
+  </div>
+</a>
