@@ -2,8 +2,8 @@ import { createClient, MicroCMSQueries } from 'microcms-js-sdk'
 import { Blog, Category, TOPSettings } from './types'
 
 const client = createClient({
-  serviceDomain: import.meta.env.PUBLIC_SERVICE_DOMAIN,
-  apiKey: import.meta.env.PUBLIC_API_KEY,
+  serviceDomain: import.meta.env.SERVICE_DOMAIN,
+  apiKey: import.meta.env.API_KEY,
 })
 
 export const getBlogs = (queries?: MicroCMSQueries) => {

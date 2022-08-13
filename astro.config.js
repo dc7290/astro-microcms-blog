@@ -11,7 +11,7 @@ import fontsNext from 'astro-fonts-next'
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL,
+  site: process.env.SITE_URL,
   integrations: [
     preact(),
     image(),
