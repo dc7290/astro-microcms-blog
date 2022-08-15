@@ -1,6 +1,5 @@
 ---
 import Footer from '@components/layout/Footer.astro'
-import Header from '@components/layout/Header.astro'
 
 export type Props = {
   title?: string
@@ -49,7 +48,6 @@ const favicon = new URL('/favicon.ico', Astro.url)
   <body
     class="body text-white font-sans leading-normal bg-slate-900 min-h-screen"
   >
-    <Header />
     <main class="pb-12 md:pb-24">
       <slot />
     </main>

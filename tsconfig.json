@@ -41,8 +41,6 @@
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
       "@utils/*": ["src/utils/*"]
-    },
-    "jsx": "preserve",
-    "jsxImportSource": "preact"
+    }
   }
 }

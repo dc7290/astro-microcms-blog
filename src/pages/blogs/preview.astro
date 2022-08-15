@@ -1,0 +1,11 @@
+---
+import PreviewBlogDetail from '@components/features/blog/PreviewBlogDetail'
+import DetailsLayout from '@layouts/DetailsLayout.astro'
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout>
+  <DetailsLayout>
+    <PreviewBlogDetail client:only="preact" />
+  </DetailsLayout>
+</Layout>

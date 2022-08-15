@@ -1,0 +1,28 @@
+---
+import BlogDetail from '@components/features/blog/BlogDetail'
+import DetailsLayout from '@layouts/DetailsLayout.astro'
+import Layout from '@layouts/Layout.astro'
+import { getBlog, getBlogs } from '@lib/microCMS/getContents'
+
+export const getStaticPaths = async () => {
+  const { contents } = await getBlogs({ limit: 10000, fields: 'id' })
+
+  return contents.map(({ id }) => ({
+    params: { id },
+  }))
+}
+
+const id = Astro.params.id
+
+if (typeof id !== 'string') {
+  throw Error('paramsの設定が無効です')
+}
+
+const content = await getBlog()(id)
+---
+
+<Layout>
+  <DetailsLayout>
+    <BlogDetail content={content} />
+  </DetailsLayout>
+</Layout>
