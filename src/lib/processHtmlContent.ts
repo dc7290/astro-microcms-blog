@@ -1,9 +1,9 @@
 import { CheerioAPI, load } from 'cheerio'
-import hljs from 'highlight.js/es/core'
-import css from 'highlight.js/es/languages/css'
-import javascript from 'highlight.js/es/languages/javascript'
-import scss from 'highlight.js/es/languages/scss'
-import typescript from 'highlight.js/es/languages/typescript'
+import hljs from 'highlight.js/lib/core'
+import css from 'highlight.js/lib/languages/css'
+import javascript from 'highlight.js/lib/languages/javascript'
+import scss from 'highlight.js/lib/languages/scss'
+import typescript from 'highlight.js/lib/languages/typescript'
 
 import { getPicture } from '@components/common/Picture'
 
