@@ -31,7 +31,7 @@ const pickedCategoriesBlogs = await Promise.all(
   <Container>
     <Section>
       <SectionHading>Recommended blogs</SectionHading>
-      <BlogAnchorList blogs={recommended_blogs} />
+      <BlogAnchorList blogs={recommended_blogs} image={{ loading: 'eager' }} />
     </Section>
   </Container>
 

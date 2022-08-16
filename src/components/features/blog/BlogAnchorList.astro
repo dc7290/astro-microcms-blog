@@ -8,6 +8,9 @@ export interface Props {
   type?: 'primary' | 'secondary'
   cols?: 2 | 3
   blogs: (Blog & MicroCMSListContent)[]
+  image?: {
+    loading?: 'eager' | 'lazy'
+  }
 }
 const { type = 'primary', cols = 3, blogs } = Astro.props as Props
 ---

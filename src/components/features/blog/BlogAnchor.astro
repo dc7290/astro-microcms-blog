@@ -7,6 +7,9 @@ export interface Props extends Pick<Blog, 'title' | 'eyecatch'> {
   id: string
   category: string
   publishedAt: string
+  image?: {
+    loading?: 'eager' | 'lazy'
+  }
 
   type?: 'primary' | 'secondary'
 }
