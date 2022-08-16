@@ -19,6 +19,7 @@ const {
   publishedAt,
   title,
   eyecatch,
+  image,
   type = 'primary',
 } = Astro.props as Props
 ---
@@ -35,6 +36,7 @@ const {
           widths={[320, 640, 960, 1280]}
           alt=""
           className="[&_img]:sm:group-hover:scale-105 [&_img]:transition-transform [&_img]:duration-300"
+          {...image}
         />
       </div>
       <p class="mt-4 leading-tight text-lg">{title}</p>

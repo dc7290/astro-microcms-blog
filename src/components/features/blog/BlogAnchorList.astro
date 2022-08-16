@@ -12,7 +12,7 @@ export interface Props {
     loading?: 'eager' | 'lazy'
   }
 }
-const { type = 'primary', cols = 3, blogs } = Astro.props as Props
+const { type = 'primary', cols = 3, blogs, image } = Astro.props as Props
 ---
 
 {
@@ -32,6 +32,7 @@ const { type = 'primary', cols = 3, blogs } = Astro.props as Props
             id={blog.id}
             category={blog.category.name}
             publishedAt={blog.publishedAt ?? blog.createdAt}
+            image={image}
           />
         </li>
       ))}
