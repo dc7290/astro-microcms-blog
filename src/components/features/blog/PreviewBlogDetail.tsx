@@ -6,6 +6,7 @@ import useSWR from 'swr'
 
 import Loading from '@components/common/Loading'
 import { Blog } from '@lib/microCMS/types'
+import processHtmlContent from '@lib/processHtmlContent'
 
 import BlogDetail from './BlogDetail'
 
@@ -18,8 +19,15 @@ const Content = () => {
     typeof id !== 'string' || typeof draftKey !== 'string'
       ? null
       : `/api/blogs/${id}?draftKey=${draftKey}`,
-    (...args): Promise<Blog & MicroCMSListContent> =>
-      fetch(...args).then((res) => res.json()),
+    async (...args): Promise<Blog & MicroCMSListContent> => {
+      const data = await fetch(...args).then(
+        (res): Promise<Blog & MicroCMSListContent> => res.json()
+      )
+      return {
+        ...data,
+        content: await processHtmlContent(data?.content),
+      }
+    },
     { suspense: true }
   )
 

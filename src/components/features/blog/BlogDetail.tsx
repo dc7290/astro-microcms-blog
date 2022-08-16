@@ -1,5 +1,7 @@
 /** @jsxImportSource preact */
 
+import 'highlight.js/styles/github-dark.css'
+
 import { MicroCMSListContent } from 'microcms-js-sdk'
 
 import Picture from '@components/common/Picture'
@@ -19,6 +21,7 @@ const BlogDetail = ({ content }: Props) => {
         height={content.eyecatch.height}
         sizes="672px"
         widths={[640, 960, 1280, 1560, 1920, 2400, 3600]}
+        loading="eager"
         alt=""
       />
       <h1 className="text-2xl font-bold leading-tight mt-8 sm:mt-12 sm:text-3xl lg:text-4xl">

@@ -3,6 +3,7 @@ import BlogDetail from '@components/features/blog/BlogDetail'
 import DetailsLayout from '@layouts/DetailsLayout.astro'
 import Layout from '@layouts/Layout.astro'
 import { getBlog, getBlogs } from '@lib/microCMS/getContents'
+import processHtmlContent from '@lib/processHtmlContent'
 
 export const getStaticPaths = async () => {
   const { contents } = await getBlogs({ limit: 10000, fields: 'id' })
@@ -19,6 +20,7 @@ if (typeof id !== 'string') {
 }
 
 const content = await getBlog()(id)
+content.content = await processHtmlContent(content.content)
 ---
 
 <Layout>
